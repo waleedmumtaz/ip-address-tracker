@@ -11,4 +11,6 @@
 	/>
 </svelte:head>
 
-<slot />
+<div class="min-h-screen bg-[url('/pattern-bg.png')] bg-no-repeat bg-top font-rubik">
+	<slot />
+</div>
