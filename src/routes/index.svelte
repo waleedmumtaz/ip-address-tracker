@@ -1,3 +1,31 @@
+<script context="module">
+	export async function load({ fetch }) {
+		const res = await fetch(
+			`https://geo.ipify.org/api/v2/country,city?apiKey=${
+				import.meta.env.VITE_IPIFY_API_KEY
+			}&ipAddress=8.8.8.8`
+		);
+		const data = await res.json();
+
+		if (res.ok) {
+			return {
+				props: {
+					ipData: data
+				}
+			};
+		}
+	}
+</script>
+
+<script>
+	export let ipData;
+
+	let ipAddress = ipData.ip;
+	let location = `${ipData.location.city}, ${ipData.location.region}, ${ipData.location.country}`;
+	let timezone = `UTC ${ipData.location.timezone}`;
+	let isp = ipData.isp;
+</script>
+
 <div>
 	<div class="text-center px-5">
 		<h1 class="text-white text-3xl py-6">IP Address Tracker</h1>
@@ -19,19 +47,19 @@
 		<div class="bg-white rounded-xl py-8 flex flex-col gap-5 border-[1px] border-gray-500">
 			<div>
 				<p class="uppercase text-cstm-dark-gray font-bold text-xs">IP Address</p>
-				<p class="font-bold text-xl">192.212.174.101</p>
+				<p class="font-bold text-xl">{ipAddress}</p>
 			</div>
 			<div>
 				<p class="uppercase text-cstm-dark-gray font-bold text-xs">Location</p>
-				<p class="font-bold text-xl">Brooklyn, NY 10001</p>
+				<p class="font-bold text-xl">{location}</p>
 			</div>
 			<div>
 				<p class="uppercase text-cstm-dark-gray font-bold text-xs">Timezone</p>
-				<p class="font-bold text-xl">UTC -05:00</p>
+				<p class="font-bold text-xl">{timezone}</p>
 			</div>
 			<div>
 				<p class="uppercase text-cstm-dark-gray font-bold text-xs">ISP</p>
-				<p class="font-bold text-xl">SpaceX Starlink</p>
+				<p class="font-bold text-xl">{isp}</p>
 			</div>
 		</div>
 	</div>
