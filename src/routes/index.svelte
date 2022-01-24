@@ -3,10 +3,10 @@
 
 	if (process.env.NODE_ENV === 'production') {
 		// For production
-		ipifyApiKey = process.env.import.meta.env.VITE_IPIFY_API_KEY;
+		ipifyApiKey = process.env.IPIFY_API_KEY;
 	} else {
 		// For development
-		ipifyApiKey = import.meta.env.VITE_IPIFY_API_KEY;
+		ipifyApiKey = IPIFY_API_KEY;
 	}
 
 	export async function load({ fetch }) {
@@ -26,6 +26,8 @@
 </script>
 
 <script>
+	import { IPIFY_API_KEY } from '$lib/Env';
+
 	export let ipData;
 
 	let ipAddress = ipData.ip;
