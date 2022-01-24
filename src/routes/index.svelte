@@ -1,9 +1,17 @@
 <script context="module">
+	let ipifyApiKey;
+
+	if (process.env.NODE_ENV === 'production') {
+		// For production
+		ipifyApiKey = process.env.import.meta.env.VITE_IPIFY_API_KEY;
+	} else {
+		// For development
+		ipifyApiKey = import.meta.env.VITE_IPIFY_API_KEY;
+	}
+
 	export async function load({ fetch }) {
 		const res = await fetch(
-			`https://geo.ipify.org/api/v2/country,city?apiKey=${
-				import.meta.env.VITE_IPIFY_API_KEY
-			}&ipAddress=8.8.8.8`
+			`https://geo.ipify.org/api/v2/country,city?apiKey=${ipifyApiKey}&ipAddress=8.8.8.8`
 		);
 		const data = await res.json();
 
