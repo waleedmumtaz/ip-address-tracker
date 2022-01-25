@@ -20,9 +20,8 @@
 </script>
 
 <script>
-	import { IPIFY_API_KEY, MAPBOX_ACCESS_TOKEN } from '$lib/Env';
-	import mapboxgl from 'mapbox-gl';
-	import { onMount } from 'svelte';
+	import { IPIFY_API_KEY } from '$lib/Env';
+	import Mapbox from '$lib/Mapbox.svelte';
 
 	export let ipData;
 
@@ -33,16 +32,6 @@
 	let lng = ipData.location.lng;
 	let lat = ipData.location.lat;
 	let loading;
-
-	mapboxgl.accessToken = `${MAPBOX_ACCESS_TOKEN}`;
-	onMount(() => {
-		const map = new mapboxgl.Map({
-			container: 'map', // container ID
-			style: 'mapbox://styles/mapbox/streets-v11', // style URL
-			center: [lng, lat], // starting position [lng, lat]
-			zoom: 9 // starting zoom
-		});
-	});
 
 	const setIpAddress = async (e) => {
 		loading = true;
@@ -78,53 +67,62 @@
 	};
 </script>
 
-<svelte:head>
-	<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
-	<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
-</svelte:head>
-
 <div>
-	<div class="px-5 text-center">
-		<h1 class="py-6 text-3xl text-white">IP Address Tracker</h1>
+	<div class="text-center">
+		<h1 class="py-6 text-3xl font-bold text-white">IP Address Tracker</h1>
 
 		<!-- IP input -->
-		<form on:submit|preventDefault={setIpAddress} class="mb-5 flex items-center justify-center">
+		<form
+			on:submit|preventDefault={setIpAddress}
+			class="mb-5 flex items-center justify-center px-5 sm:mx-auto sm:max-w-lg"
+		>
 			<input
 				name="ip_address"
 				type="text"
 				placeholder="Search for any IP address or domain"
 				class="w-full rounded-l-xl px-6 py-4 placeholder:text-sm focus:outline-none"
 			/>
-			<button class="inline-flex items-center justify-center rounded-r-xl bg-black py-4 pl-4 pr-5">
+			<button
+				class="inline-flex items-center justify-center rounded-r-xl bg-black py-4 pl-4 pr-5 hover:bg-gray-700"
+			>
 				><img src="/icon-arrow.svg" alt="arrow icon" /></button
 			>
 		</form>
 
 		{#if loading}
-			<div class="rounded-xl border-[1px] border-gray-500 bg-white py-8 px-4">
+			<div
+				class="mx-5 rounded-xl border-[1px] border-gray-500 bg-white py-8 sm:mx-auto sm:max-w-6xl"
+			>
 				<h2 class="text-3xl">Loading...</h2>
 			</div>
 		{:else}
 			<!-- IP info -->
-			<div class="flex flex-col gap-5 rounded-xl border-[1px] border-gray-500 bg-white py-8 px-4">
-				<div>
-					<p class="text-xs font-bold uppercase text-cstm-dark-gray">IP Address</p>
-					<p class="text-xl font-bold">{ipAddress}</p>
-				</div>
-				<div>
-					<p class="text-xs font-bold uppercase text-cstm-dark-gray">Location</p>
-					<p class="text-xl font-bold">{location}</p>
-				</div>
-				<div>
-					<p class="text-xs font-bold uppercase text-cstm-dark-gray">Timezone</p>
-					<p class="text-xl font-bold">{timezone}</p>
-				</div>
-				<div>
-					<p class="text-xs font-bold uppercase text-cstm-dark-gray">ISP</p>
-					<p class="text-xl font-bold">{isp}</p>
+			<div class="px-5">
+				<div
+					class="flex flex-col gap-5 rounded-xl border-[1px] border-gray-500 bg-white py-8 px-4 sm:flex-none sm:grid sm:grid-cols-4 sm:divide-x-2 sm:text-left sm:max-w-6xl sm:mx-auto"
+				>
+					<div class="sm:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">IP Address</p>
+						<p class="text-xl sm:text-xl font-bold">{ipAddress}</p>
+					</div>
+					<div class="sm:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">Location</p>
+						<p class="text-xl sm:text-xl font-bold">{location}</p>
+					</div>
+					<div class="sm:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">Timezone</p>
+						<p class="text-xl sm:text-xl font-bold">{timezone}</p>
+					</div>
+					<div class="sm:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">ISP</p>
+						<p class="text-xl sm:text-xl font-bold">{isp}</p>
+					</div>
 				</div>
 			</div>
-			<div id="map" class="my-5 h-96 w-full rounded-xl" />
+			<!-- Map -->
+			<div class="sm:max-w-6xl sm:mx-auto px-5">
+				<Mapbox {lng} {lat} />
+			</div>
 		{/if}
 	</div>
 </div>
