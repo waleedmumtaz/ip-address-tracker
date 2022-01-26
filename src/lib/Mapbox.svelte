@@ -21,4 +21,12 @@
 	<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
 </svelte:head>
 
-<div id="map" class="my-5 h-96 w-full rounded-xl" />
+<div id="map" class="h-full w-full" />
+
+<style>
+	#map {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+	}
+</style>

@@ -67,14 +67,14 @@
 	};
 </script>
 
-<div>
-	<div class="text-center">
+<div class="flex flex-1 flex-col">
+	<div class="flex flex-1 flex-col text-center">
 		<h1 class="py-6 text-3xl font-bold text-white">IP Address Tracker</h1>
 
 		<!-- IP input -->
 		<form
 			on:submit|preventDefault={setIpAddress}
-			class="mb-5 flex items-center justify-center px-5 sm:mx-auto sm:max-w-lg"
+			class="mb-5 flex w-full items-center justify-center px-5 md:mx-auto md:max-w-lg"
 		>
 			<input
 				name="ip_address"
@@ -90,37 +90,35 @@
 		</form>
 
 		{#if loading}
-			<div
-				class="mx-5 rounded-xl border-[1px] border-gray-500 bg-white py-8 sm:mx-auto sm:max-w-6xl"
-			>
+			<div class="mx-5 w-full rounded-xl bg-white py-8 shadow-md md:mx-auto md:max-w-6xl">
 				<h2 class="text-3xl">Loading...</h2>
 			</div>
 		{:else}
 			<!-- IP info -->
 			<div class="px-5">
 				<div
-					class="flex flex-col gap-5 rounded-xl border-[1px] border-gray-500 bg-white py-8 px-4 sm:flex-none sm:grid sm:grid-cols-4 sm:divide-x-2 sm:text-left sm:max-w-6xl sm:mx-auto"
+					class="flex flex-col gap-5 rounded-xl bg-white py-8 px-4 md:flex-none shadow-md md:grid md:grid-cols-4 md:divide-x-2 md:text-left md:max-w-6xl md:mx-auto"
 				>
-					<div class="sm:px-10">
-						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">IP Address</p>
-						<p class="text-xl sm:text-xl font-bold">{ipAddress}</p>
+					<div class="md:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray md:mb-3	">IP Address</p>
+						<p class="text-xl md:text-xl font-bold">{ipAddress}</p>
 					</div>
-					<div class="sm:px-10">
-						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">Location</p>
-						<p class="text-xl sm:text-xl font-bold">{location}</p>
+					<div class="md:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray md:mb-3	">Location</p>
+						<p class="text-xl md:text-xl font-bold">{location}</p>
 					</div>
-					<div class="sm:px-10">
-						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">Timezone</p>
-						<p class="text-xl sm:text-xl font-bold">{timezone}</p>
+					<div class="md:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray md:mb-3	">Timezone</p>
+						<p class="text-xl md:text-xl font-bold">{timezone}</p>
 					</div>
-					<div class="sm:px-10">
-						<p class="text-xs font-bold uppercase text-cstm-dark-gray sm:mb-3	">ISP</p>
-						<p class="text-xl sm:text-xl font-bold">{isp}</p>
+					<div class="md:px-10">
+						<p class="text-xs font-bold uppercase text-cstm-dark-gray md:mb-3	">ISP</p>
+						<p class="text-xl md:text-xl font-bold">{isp}</p>
 					</div>
 				</div>
 			</div>
 			<!-- Map -->
-			<div class="sm:max-w-6xl sm:mx-auto px-5">
+			<div class="flex-1 relative md:-top-28 mt-5 md:mt-0 -z-10">
 				<Mapbox {lng} {lat} />
 			</div>
 		{/if}

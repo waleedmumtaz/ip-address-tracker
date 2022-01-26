@@ -11,6 +11,8 @@
 	/>
 </svelte:head>
 
-<div class="min-h-screen bg-[url('/pattern-bg.png')] bg-top bg-no-repeat font-rubik">
+<div
+	class="mx-auto flex min-h-screen max-w-7xl flex-col bg-[url('/pattern-bg.png')] bg-top bg-no-repeat font-rubik"
+>
 	<slot />
 </div>
