@@ -13,6 +13,12 @@
 			center: [lng, lat], // starting position [lng, lat]
 			zoom: 9 // starting zoom
 		});
+
+		const marker = new mapboxgl.Marker({
+			color: '#000000'
+		})
+			.setLngLat([lng, lat])
+			.addTo(map);
 	});
 </script>
 

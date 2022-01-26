@@ -95,7 +95,7 @@
 			</div>
 		{:else}
 			<!-- IP info -->
-			<div class="px-5">
+			<div class="px-5 relative z-10">
 				<div
 					class="flex flex-col gap-5 rounded-xl bg-white py-8 px-4 md:flex-none shadow-md md:grid md:grid-cols-4 md:divide-x-2 md:text-left md:max-w-6xl md:mx-auto"
 				>
@@ -118,7 +118,7 @@
 				</div>
 			</div>
 			<!-- Map -->
-			<div class="flex-1 relative md:-top-28 mt-5 md:mt-0 -z-10">
+			<div class="flex-1 relative md:-top-28 mt-5 md:mt-0">
 				<Mapbox {lng} {lat} />
 			</div>
 		{/if}
