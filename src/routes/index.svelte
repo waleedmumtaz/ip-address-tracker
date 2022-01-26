@@ -67,7 +67,7 @@
 	};
 </script>
 
-<div class="flex flex-1 flex-col">
+<main class="flex flex-1 flex-col">
 	<div class="flex flex-1 flex-col text-center">
 		<h1 class="py-6 text-3xl font-bold text-white">IP Address Tracker</h1>
 
@@ -123,4 +123,4 @@
 			</div>
 		{/if}
 	</div>
-</div>
+</main>
